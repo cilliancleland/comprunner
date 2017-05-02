@@ -1,0 +1,25 @@
+<div>
+  <form name="roundForm">
+    <div ng-repeat="game in round.games" class="form-group">
+      <div ng-if="game.result != 'bye'">
+        <label for="result{{game.gameNumber}}">
+              Game {{game.gameNumber}}
+              <small >{{players[game.player1].name}} ({{players[game.player1].army}})
+              vs
+              {{players[game.player2].name}} ({{players[game.player2].army}})</small>
+        </label>
+        <select name="result{{game.gameNumber}}" id="result{{game.gameNumber}}" ng-model="game.result" required class="form-control">
+          <option value="">---select result---</option>
+          <option value="Player 1 win">{{players[game.player1].name}} win</option>
+          <option value="Player 2 win">{{players[game.player2].name}} win</option>
+          <option value="Draw">Draw</option>
+        </select>
+      </div>
+      <div ng-if="game.result == 'bye'">
+        Bye for {{players[game.player2].name}}
+      </div>
+    </div>
+    <button ng-click="submit()" ng-disabled="roundForm.$invalid" ng-if="isCurrentRound=='true'" class="btn " 
+      ng-class="roundForm.$invalid ? 'btn-disabled' : 'btn-success'">Complete round</button>
+  </form>
+</div>

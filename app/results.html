@@ -1,0 +1,30 @@
+<table class="table table-striped">
+  <thead>
+    <th class="col-xs-4">
+      Name
+    </th>
+    <th class="col-xs-4">
+      Army
+    </th>
+    <th class="col-xs-2">
+      Score
+    </th>
+    <th class="col-xs-2">
+      Countback
+    </th>
+  </thead>
+  <tr ng-repeat="playerId in finalOrder">
+    <td class="col-xs-4">
+      {{players[playerId].name}}
+    </td>
+    <td class="col-xs-4">
+      {{players[playerId].army}}
+    </td>
+    <td class="col-xs-2">
+      {{players[playerId].score}}
+    </td>
+    <td class="col-xs-2">
+      ({{players[playerId].countBack}})
+    </td>
+  </tr>
+</table>
