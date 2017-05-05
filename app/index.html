@@ -7,6 +7,7 @@
     <script data-require="bootstrap@*" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script data-require="angular.js@4.0.0" data-semver="4.0.0" src="https://code.angularjs.org/latest/angular.min.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <script src="services/players.js"></script>
     <script src="script.js"></script>
   </head>
   <body ng-app="swissChess">
@@ -23,9 +24,9 @@
           <li role="presentation" ng-if="completed" ng-class="activeTab=='results' ? 'active':''"><a href="#" ng-click="showTab('results')">Results</a></li>
         </ul>
 
-        <sc-player-details ng-if="activeTab=='players'" players="players" setup-first-round="setupFirstRound(players)" is-started="{{playerOrder.length != 0}}"></sc-player-details>
-        <sc-round ng-if="activeTab!='players' && activeTab!='results' " players="players" round="rounds[activeTab]" complete-round="completeRound()" is-current-round="{{activeTab == currentRoundNumber}}"></sc-round>
-        <sc-results ng-if="activeTab=='results'" players="players" final-order="finalOrder"></sc-results>
+        <sc-player-details ng-if="activeTab=='players'" players="getAllPlayers()" setup-first-round="setupFirstRound(players)" is-started="{{playerOrder.length != 0}}"></sc-player-details>
+        <sc-round ng-if="activeTab!='players' && activeTab!='results' " players="getAllPlayers()" round="rounds[activeTab]" complete-round="completeRound()" is-current-round="{{activeTab == currentRoundNumber}}"></sc-round>
+        <sc-results ng-if="activeTab=='results'" players="getAllPlayers()" final-order="finalOrder"></sc-results>
       </div>
     </div>
   </body>
