@@ -27,7 +27,7 @@
       </div>
     </div>
     <button ng-click="setupFirstRound()" class="btn" ng-class="playerDetails.$invalid ? 'btn-disabled' : 'btn-success'"
-    ng-disabled="playerDetails.$invalid" ng-if="isStarted=='false'">Create First Round</button>
+    ng-disabled="playerDetails.$invalid" ng-if="!game.isStarted()">Create First Round</button>
   </form>
 
 </div>

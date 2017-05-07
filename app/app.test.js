@@ -1,20 +1,20 @@
 var mock, notify;
 beforeEach(module('swissChess'));
-beforeEach(function() {
+// beforeEach(function() {
 //   mock = {alert: jasmine.createSpy()};
 
 //   module(function($provide) {
 //     $provide.value('$window', mock);
 //   });
 
-  inject(function($injector) {
-    playersFactory = $injector.get('playersFactory');
-  });
-});
+//   inject(function($injector) {
+//     playersFactory = $injector.get('playersFactory');
+//   });
+// });
 
-it('should start with an empty players object', function() {
-  expect(playersFactory.players).toEqual({});
-});
+// it('should start with an empty players object', function() {
+//   expect(playersFactory.players).toEqual({});
+// });
 
 // it('should not alert first two notifications', function() {
 //   notify('one');

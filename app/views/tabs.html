@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs">
+  <li role="presentation" ng-class="game.activeTab=='players' ? 'active':''"><a href="#" ng-click="showTab('players')">Players</a></li>
+  <li role="presentation"  ng-repeat="round in game.rounds" ng-class="game.activeTab==round.roundNumber ? 'active':''"><a href="#" ng-click="showTab(round.roundNumber)">Round {{round.roundNumber}}</a></li>
+  <li role="presentation" ng-if="game.finalOrder.length > 0" ng-class="game.activeTab=='results' ? 'active':''"><a href="#" ng-click="showTab('results')">Results</a></li>
+</ul>

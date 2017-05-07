@@ -1,7 +1,7 @@
 <p ng-if="saved">{{saved}}</p>
 <div class="btn-group" role="group" aria-label="Save menu">
-  <button type="button" class="btn btn-default" ng-if = "initialised" ng-click="reset()">Reset</button>
-  <button type="button" class="btn btn-default" ng-if = "initialised" ng-click="save()">Save</button>
+  <button type="button" class="btn btn-default" ng-if = "game.isInitialised" ng-click="reset()">Reset</button>
+  <button type="button" class="btn btn-default" ng-if = "game.isInitialised" ng-click="save()">Save</button>
   <button type="button" class="btn btn-default" ng-if = "saved" ng-click="load()">Load</button>
   <button type="button" class="btn btn-default" ng-if = "saved" ng-click="deleteSave()">Delete save</button>
   

@@ -8,12 +8,13 @@
               vs
               {{players[game.player2].name}} ({{players[game.player2].army}})</small>
         </label>
-        <select name="result{{game.gameNumber}}" id="result{{game.gameNumber}}" ng-model="game.result" required class="form-control">
+        <select name="result{{game.gameNumber}}" ng-if="isCurrentRound=='true'" id="result{{game.gameNumber}}" ng-model="game.result" required class="form-control">
           <option value="">---select result---</option>
           <option value="Player 1 win">{{players[game.player1].name}} win</option>
           <option value="Player 2 win">{{players[game.player2].name}} win</option>
           <option value="Draw">Draw</option>
         </select>
+        <p ng-if="isCurrentRound!='true'">{{game.result}}</p>
       </div>
       <div ng-if="game.result == 'bye'">
         Bye for {{players[game.player2].name}}

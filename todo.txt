@@ -1,0 +1,3 @@
+add test coverage
+bundle to one script
+eslint

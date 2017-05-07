@@ -8,9 +8,9 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'components/**/*.js',
-      'view*/**/*.js',
-      'scrip*.js'
+      'app*.js',
+      'components/*.js',
+      'services/*.js',
     ],
 
     autoWatch: true,
@@ -29,7 +29,11 @@ module.exports = function(config) {
     junitReporter: {
       outputFile: 'test_out/unit.xml',
       suite: 'unit'
+    },
+    preprocessors: {
+      'views/**/*.html': 'html2js'
     }
 
   });
 };
+;
