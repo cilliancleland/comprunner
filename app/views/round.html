@@ -17,7 +17,7 @@
         <p ng-if="isCurrentRound!='true'">{{game.result}}</p>
       </div>
       <div ng-if="game.result == 'bye'">
-        Bye for {{players[game.player2].name}}
+        <label>Bye for {{players[game.player2].name}}</label>
       </div>
     </div>
     <button ng-click="submit()" ng-disabled="roundForm.$invalid" ng-if="isCurrentRound=='true'" class="btn " 

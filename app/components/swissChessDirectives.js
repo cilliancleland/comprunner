@@ -50,7 +50,7 @@
         scope.submit = function(){
           scope.roundForm.$setPristine();
           scope.roundForm.$setUntouched();
-          scope.completeRound()
+          scope.completeRound();
         }
 
       },

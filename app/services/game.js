@@ -80,7 +80,7 @@
           case "bye":
           player1.score += POINTS_FOR_BYE;
           break;
-          default:
+          default://a draw
           player1.score += POINTS_FOR_DRAW;
           player2.score += POINTS_FOR_DRAW;
         }
@@ -93,7 +93,7 @@
         gameFactory.setupRound(nextRoundNumber);
       }
     }
-
+    //completes a competition and generates the results
     function completeComp() {
         generateCountBack();
         gameFactory.finalOrder = players.sortPlayers(Object.keys(players.getAllPlayers()), "countBack");
@@ -101,6 +101,7 @@
         gameFactory.currentRoundNumber = 0;
     }
 
+    // generates the countback for each player by adding the scores of all the players they have beaten
     function generateCountBack() {    
       for(let roundNumber in gameFactory.rounds){
         let round = gameFactory.rounds[roundNumber];
@@ -125,8 +126,8 @@
       }
     }
 
-    gameFactory.getSaveObj = function getSaveObj() {
-      
+    // takes the comp's  state and puts it into an object that can be saved
+    gameFactory.getSaveObj = function getSaveObj() {      
       let saveObj = {};
       saveObj.isInitialised = gameFactory.isInitialised;
       saveObj.numPlayers = gameFactory.numPlayers;
@@ -141,9 +142,8 @@
       return saveObj;
     }
 
-
-    gameFactory.setFromSaveObj = function setFromSaveObj(saveObj) {
-      
+    // sets all the game details from a save object that is passed in
+    gameFactory.setFromSaveObj = function setFromSaveObj(saveObj) {      
       gameFactory.isInitialised= saveObj.isInitialised;
       gameFactory.numPlayers= saveObj.numPlayers;
       gameFactory.numRounds= saveObj.numRounds;
@@ -154,7 +154,7 @@
       gameFactory.activeTab= saveObj.activeTab;       
       playerOrder = saveObj.playerOrder;
     }
-
     return gameFactory;
   }]);
+
 })();

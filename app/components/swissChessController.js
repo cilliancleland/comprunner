@@ -8,7 +8,7 @@
   const RESET_PROMPT = "Are you sure, this will clear your current competition.\n\nPress ok to continue.";
   const SAVED_GAME_NAME = "savedComp";
 
-  swissChess.controller("mainCtrl",["$scope", "playersFactory", "gameFactory",
+  swissChess.controller("swissChessCtrl",["$scope", "playersFactory", "gameFactory",
   function($scope, players, game){
 
     $scope.saved = false;

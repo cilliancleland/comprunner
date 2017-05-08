@@ -13,8 +13,7 @@
       <label for="numRounds">Number of rounds:</label>
       <input class="form-control" ng-model="game.numRounds" id="numRounds" name="numRounds" type="number" min="1" max="999" required />
       <span class="help-block" ng-show="setupForm.numRounds.$touched && setupForm.numRounds.$invalid">Please enter a number between 1 and 999</span>
-    </div>
-    
+    </div>    
     <div>
         <button ng-click="runSetup()"
         ng-disabled="setupForm.$invalid" class="btn" ng-class="setupForm.$invalid ? 'btn-disabled' : 'btn-success'">Get Started</button>
