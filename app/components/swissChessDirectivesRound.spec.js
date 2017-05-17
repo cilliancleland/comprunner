@@ -1,11 +1,11 @@
 'use strict';
 
 describe('swissChessDirectives: scRound', function() {
-  var injector;
-  var element;
-  var scope;
+  let injector;
+  let element;
+  let scope;
   beforeEach(function() {
-    injector = angular.injector(['ng','swissChess',"views/round.html"]);
+    injector = angular.injector(['ng','swissChess',"app/views/round.html"]);
 
     injector.invoke(function($rootScope, $compile) {
       scope = $rootScope.$new();
@@ -30,7 +30,7 @@ describe('swissChessDirectives: scRound', function() {
   });
 
   it('has one row for each game', function() {
-    let labels = element.find('label');
+    const labels = element.find('label');
     expect(labels.length).toEqual(3);
     expect(labels[0].innerText.replace(/\s+/g, '') ).toEqual('Game1fred(army)vsjed(army)');
     expect(labels[1].innerText.replace(/\s+/g, '')).toEqual('Game2ned(army)vsted(army)');
@@ -38,30 +38,30 @@ describe('swissChessDirectives: scRound', function() {
   });
 
   it('shows selects & button if current round', function() {
-    let selects = element.find('select');
+    const selects = element.find('select');
     expect(selects.length).toEqual(2);
     expect(selects[0].options[0].value).toEqual('');
     expect(selects[0].options[1].value).toEqual('Player 1 win');
     expect(selects[0].options[2].value).toEqual('Player 2 win');
     expect(selects[0].options[3].value).toEqual('Draw');
-    let buttons = element.find('button');
+    const buttons = element.find('button');
     expect(buttons.length).toEqual(1);
     expect(buttons[0].innerHTML).toEqual('Complete round');
   });
 
   it('shows text &  no button if not current round', function() {
-    var isolatedScope = element.isolateScope();
+    const isolatedScope = element.isolateScope();
     isolatedScope.isCurrentRound="false"
     scope.$apply();
-    let buttons = element.find('button');
+    const buttons = element.find('button');
     expect(buttons.length).toEqual(0);
-    let selects = element.find('select');
+    const selects = element.find('select');
     expect(selects.length).toEqual(0);
   });
 
   it('button is disabled when form is incomplete', function() {
-    let buttons = element.find('button');
-    var isolatedScope = element.isolateScope();
+    const buttons = element.find('button');
+    const isolatedScope = element.isolateScope();
     spyOn(isolatedScope, 'completeRound');
     expect(isolatedScope.completeRound).not.toHaveBeenCalled();
     buttons[0].click();
@@ -69,8 +69,8 @@ describe('swissChessDirectives: scRound', function() {
   });
 
   it('calls complete round when button clicked', function() {
-    let buttons = element.find('button');
-    var isolatedScope = element.isolateScope();
+    const buttons = element.find('button');
+    const isolatedScope = element.isolateScope();
     spyOn(isolatedScope, 'completeRound');
     scope.round.games["1"].result = "Draw";
     scope.round.games["2"].result = "Draw";

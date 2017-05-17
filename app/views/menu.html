@@ -1,8 +1,31 @@
-<p ng-if="saved">{{saved}}</p>
-<div class="btn-group" role="group" aria-label="Save menu">
-  <button type="button" class="btn btn-default" ng-if = "game.isInitialised" ng-click="reset()">Reset</button>
-  <button type="button" class="btn btn-default" ng-if = "game.isInitialised" ng-click="save()">Save</button>
-  <button type="button" class="btn btn-default" ng-if = "saved" ng-click="load()">Load</button>
-  <button type="button" class="btn btn-default" ng-if = "saved" ng-click="deleteSave()">Delete save</button>
-  
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Comp Runner</a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" ng-click="toggleAbout()">Help / About</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Save / Load / Reset <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-if="saved" class="dropdown-header dropdown-header-wrapped"><p >{{saved}}</p></li>
+            <li class="divider"></li>
+            <li><a href="#" ng-if = "game.isInitialised" ng-click="reset()">Reset</a></li>
+            <li><a href="#" ng-if = "game.isInitialised" ng-click="save()">Save</a></li>
+            <li><a href="#" ng-if = "saved" ng-click="load()">Load</a></li>
+            <li><a href="#" ng-if = "saved" ng-click="deleteSave()">Delete save</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>

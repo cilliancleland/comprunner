@@ -1,11 +1,11 @@
 'use strict';
 
 describe('swissChessDirectives: scResults', function() {
-  var injector;
-  var element;
-  var scope;
+  let injector;
+  let element;
+  let scope;
   beforeEach(function() {
-    injector = angular.injector(['ng','swissChess',"views/results.html"]);
+    injector = angular.injector(['ng','swissChess',"app/views/results.html"]);
 
     injector.invoke(function($rootScope, $compile) {
       scope = $rootScope.$new();
@@ -22,7 +22,7 @@ describe('swissChessDirectives: scResults', function() {
   });
 
   it('has one row for each player', function() {
-    let trs = element.find('tr');
+    const trs = element.find('tr');
     expect(trs.length).toEqual(5);
     expect(trs[0].innerText.replace(/\s+/g, '') ).toEqual('NameArmyScoreCountback');
     expect(trs[1].innerText.replace(/\s+/g, '')).toEqual('tedarmy4(4)');

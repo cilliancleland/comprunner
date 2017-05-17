@@ -1,5 +1,6 @@
 <div>
   <form name="roundForm">
+    <h2>Round {{round.roundNumber}}</h2>
     <div ng-repeat="game in round.games" class="form-group">
       <div ng-if="game.result != 'bye'">
         <label for="result{{game.gameNumber}}">
@@ -20,7 +21,7 @@
         <label>Bye for {{players[game.player2].name}}</label>
       </div>
     </div>
-    <button ng-click="submit()" ng-disabled="roundForm.$invalid" ng-if="isCurrentRound=='true'" class="btn " 
-      ng-class="roundForm.$invalid ? 'btn-disabled' : 'btn-success'">Complete round</button>
+    <button ng-click="submit()" ng-disabled="roundForm.$invalid" ng-if="isCurrentRound=='true'" class="btn btn-block" 
+      ng-class="roundForm.$invalid ? 'btn-disabled' : 'btn-primary'">Complete round</button>
   </form>
 </div>

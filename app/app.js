@@ -1,3 +1,7 @@
-"use strict";
-let swissChess = angular.module('swissChess', []);
+require('./style.css');
+
+angular.module('swissChess', []);
+
+require('./components/swissChessComponent');
+
 

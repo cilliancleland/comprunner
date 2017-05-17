@@ -1,9 +1,6 @@
-(function(){
-  "use strict";
-
-  swissChess.factory("playersFactory", [function(){
+angular.module('swissChess').factory("playersFactory", [function(){
     let players = {};
-    const playersFactory = {};
+    let playersFactory = {};
 
     playersFactory.sortPlayers = function sortPlayers(currentOrder, sortBy){
       return currentOrder.sort((a,b) => {
@@ -12,7 +9,7 @@
     };
 
     playersFactory.shufflePlayers = function shufflePlayers(currentOrder) {
-      let modifier = currentOrder.length % 2 ? 1 : 2;//if an odd number of players, we need to adjust our shuffle, else the last player never gets a bye
+      const modifier = currentOrder.length % 2 ? 1 : 2;//if an odd number of players, we need to adjust our shuffle, else the last player never gets a bye
       currentOrder.unshift(currentOrder[currentOrder.length-modifier]);
       currentOrder.splice(currentOrder.length-modifier, 1)
     };
@@ -41,4 +38,3 @@
 
     return playersFactory;
   }]);
-})();

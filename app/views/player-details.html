@@ -1,33 +1,34 @@
 <div>
   <form name="playerDetails">
+    <h2>Player details</h2>
+    <div ng-if="playerOrder.length===0">
+      <p>Enter a name for each player and the army they will be using.</p>
+      <p>Once you have entered this information, click on the <strong>Create First Found</strong> button</p>
+    </div>
     <div ng-repeat="player in players" class="row">
-      <div  class="col-xs-1">
-        {{player.id}}
+      <div  class="col-xs-12">
+          <h4>Player {{player.id}}
+            <small>
+            {{player.score}} points ({{player.countBack}})
+            </small>
+          </h3>
       </div>
-      <div  class="col-xs-5">
+      <div  class="col-xs-12 col-md-6">
         <div class="form-group" ng-class="playerDetails['playerName'+player.id].$touched && playerDetails['playerName'+player.id].$invalid ? 'has-error' : ''">
-          <label for="playerName{{player.id}}">Player name</label>
-          <input class="form-control" ng-model="player.name" name="playerName{{player.id}}" id="playerName{{player.id}}" required  ng-pattern="/[a-zA-Z0-9]{3,}/" />
+          <label for="playerName{{player.id}}" class="hidden-xs">Name</label>
+          <input class="form-control" ng-model="player.name" name="playerName{{player.id}}" id="playerName{{player.id}}" placeholder="Name" required  ng-pattern="/[a-zA-Z0-9]{3,}/" />
           <span class="help-block" ng-show="playerDetails['playerName'+player.id].$touched && playerDetails['playerName'+player.id].$invalid">please enter a name</span>
         </div>
-      </div>
-      
-      <div  class="col-xs-5">
-        <div class="form-group">
-          <label for="playerArmy{{player.id}}">army</label>
-          <input class="form-control" ng-model="player.army" name="playerArmy{{player.id}}" id="playerArmy{{player.id}}" required />
-          <span class="help-block" ng-show="playerDetails['playerArmy'+player.id].$touched && playerDetails['playerArmy'+player.id].$invalid">please enter a army</span>
+      </div>      
+      <div  class="col-xs-12 col-md-6">
+        <div class="form-group" ng-class="playerDetails['playerArmy'+player.id].$touched && playerDetails['playerArmy'+player.id].$invalid ? 'has-error' : ''">
+          <label for="playerArmy{{player.id}}" class="hidden-xs">Army</label>
+          <input class="form-control" ng-model="player.army" name="playerArmy{{player.id}}" id="playerArmy{{player.id}}" placeholder="Army" required />
+          <span class="help-block" ng-show="playerDetails['playerArmy'+player.id].$touched && playerDetails['playerArmy'+player.id].$invalid">Please enter an army</span>
         </div>
       </div>
-      <div  class="col-xs-1">
-        <p>
-          Score: {{player.score}}
-          <span ng-if="player.countBack">Countback: </span>{{player.countBack}}
-        </p>
-      </div>
     </div>
-    <button ng-click="setupFirstRound()" class="btn" ng-class="playerDetails.$invalid ? 'btn-disabled' : 'btn-success'"
-    ng-disabled="playerDetails.$invalid" ng-if="!game.isStarted()">Create First Round</button>
+    <button ng-click="setupFirstRound()" class="btn btn-block " ng-class="playerDetails.$invalid ? 'btn-disabled' : 'btn-primary'"
+    ng-disabled="playerDetails.$invalid" ng-if="playerOrder.length===0">Create First Round</button>
   </form>
-
 </div>

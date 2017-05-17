@@ -1,10 +1,9 @@
 'use strict';
 
 describe('game factory', function() {
-  var playersFactory, gameFactory;
-  let game;
+  let playersFactory, gameFactory, game;
 
-  let saveObj = JSON.parse(`{
+  const saveObj = JSON.parse(`{
     "isInitialised":true,
     "numPlayers":4,
     "numRounds":4,
@@ -97,7 +96,7 @@ describe('game factory', function() {
   it('should completeRound correctly for middle round', function() {
     gameFactory.setFromSaveObj(saveObj);
     gameFactory.completeRound();
-    let round = gameFactory.rounds[3];
+    const round = gameFactory.rounds[3];
     expect(gameFactory.currentRoundNumber).toEqual(3);
     expect(gameFactory.activeTab).toEqual(3);
     expect(round.games['1'].player1).toEqual('3');
@@ -107,7 +106,7 @@ describe('game factory', function() {
   });
 
   it('should completeRound correctly for last round', function() {
-    let newSaveObj = Object.assign({}, saveObj, {numRounds:2});
+    const newSaveObj = Object.assign({}, saveObj, {numRounds:2});
     gameFactory.setFromSaveObj(newSaveObj);
     gameFactory.completeRound();
 
@@ -131,7 +130,7 @@ describe('game factory', function() {
 
   it('should getSaveObj correctly', function() {    
     gameFactory.setFromSaveObj(saveObj);
-    let newSaveObj = gameFactory.getSaveObj();
+    const newSaveObj = gameFactory.getSaveObj();
     expect(saveObj.isInitialised).toEqual(gameFactory.isInitialised);
     expect(saveObj.numPlayers).toEqual(gameFactory.numPlayers);
     expect(saveObj.numRounds).toEqual(gameFactory.numRounds);

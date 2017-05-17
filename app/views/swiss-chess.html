@@ -1,11 +1,15 @@
-<sc-menu></sc-menu>
-<sc-setup ng-if="!game.isInitialised" setup="game.getStarted()" game="game"></sc-setup>
-<div ng-if="game.isInitialised">
-  <h1>{{game.title}}</h1>
-  <h1><small>{{game.numPlayers}} Players : {{game.numRounds}} Rounds</small></h1>
+<div class="container">
+  <sc-menu></sc-menu>
+  <sc-about ng-if="showAbout"></sc-about>
+  <div ng-if="!showAbout">
+    <sc-setup ng-if="!game.isInitialised" setup="game.getStarted()" game="game"></sc-setup>
+    <div ng-if="game.isInitialised">
+      <h1>{{game.title}}<br /><small>{{game.numPlayers}} Players : {{game.numRounds}} Rounds</small></h1>
 
-  <sc-tabs></sc-tabs>
-  <sc-player-details ng-if="game.activeTab=='players'" players="getAllPlayers()" setup-first-round="game.setupFirstRound()" is-started="game.isStarted()"></sc-player-details>
-  <sc-round ng-if="game.activeTab!='players' && game.activeTab!='results' " players="getAllPlayers()" round="game.rounds[game.activeTab]" complete-round="game.completeRound()" is-current-round="{{game.activeTab == game.currentRoundNumber}}"></sc-round>
-  <sc-results ng-if="game.activeTab=='results'" players="getAllPlayers()" final-order="game.finalOrder"></sc-results>
+      <sc-tabs></sc-tabs>
+      <sc-player-details ng-if="game.activeTab=='players'" players="getAllPlayers()" player-order="game.playerOrder" setup-first-round="game.setupFirstRound()" ></sc-player-details>
+      <sc-round ng-if="game.activeTab!='players' && game.activeTab!='results' " players="getAllPlayers()" round="game.rounds[game.activeTab]" complete-round="game.completeRound()" is-current-round="{{game.activeTab == game.currentRoundNumber}}"></sc-round>
+      <sc-results ng-if="game.activeTab=='results'" players="getAllPlayers()" final-order="game.finalOrder"></sc-results>
+    </div>
+  </div>
 </div>

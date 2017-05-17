@@ -1,18 +1,16 @@
-(function(){
-  "use strict";
-  const POINTS_FOR_WIN = 3;
-  const POINTS_FOR_BYE = 3;
-  const POINTS_FOR_DRAW = 1;
 
-  swissChess.factory("gameFactory", ["playersFactory", function(players){
-    let playerOrder = [];
+const POINTS_FOR_WIN = 3;
+const POINTS_FOR_BYE = 3;
+const POINTS_FOR_DRAW = 1;
+
+gameFactory.$inject = ['playersFactory'];
+angular.module('swissChess').factory("gameFactory", gameFactory);
+
+function gameFactory(players){
     
     const gameFactory = {};
     gameFactory.rounds = {};
-
-    gameFactory.isStarted = function isStarted() {
-      return playerOrder.length != 0;
-    };
+    gameFactory.playerOrder = [];
     
     // returns all properties to their empty defaults
     gameFactory.init = function init(){      
@@ -24,7 +22,7 @@
       players.resetPlayers();
       gameFactory.currentRoundNumber = "0";
       gameFactory.rounds = {};
-      playerOrder = [];
+      gameFactory.playerOrder = [];
       gameFactory.finalOrder = [];
     }
 
@@ -37,7 +35,7 @@
 
     // sets up the initial player order and the first round
     gameFactory.setupFirstRound = function setupFirstRound() {
-      playerOrder = Object.keys(players.getAllPlayers());
+      gameFactory.playerOrder = Object.keys(players.getAllPlayers());
       gameFactory.setupRound("1");
     }
     
@@ -46,16 +44,16 @@
     gameFactory.setupRound = function setupRound(newRoundNumber){
       gameFactory.currentRoundNumber = newRoundNumber;
       gameFactory.rounds[newRoundNumber] = {roundNumber:newRoundNumber,games:{}};
-      let currentRound = gameFactory.rounds[gameFactory.currentRoundNumber];
-      players.shufflePlayers(playerOrder);
+      const currentRound = gameFactory.rounds[gameFactory.currentRoundNumber];
+      players.shufflePlayers(gameFactory.playerOrder);
       
-      let numGames = playerOrder.length /2;
+      const numGames = gameFactory.playerOrder.length /2;
       for(let i=0;i<numGames;i++){
       currentRound.games[i+1] = {
           gameNumber:i+1,
-          player1:playerOrder[i],
-          player2:playerOrder[playerOrder.length - i - 1],
-          result: i === playerOrder.length - i - 1 ? 'bye' : ''
+          player1:gameFactory.playerOrder[i],
+          player2:gameFactory.playerOrder[gameFactory.playerOrder.length - i - 1],
+          result: i === gameFactory.playerOrder.length - i - 1 ? 'bye' : ''
       };
       }
       gameFactory.activeTab = newRoundNumber;
@@ -64,12 +62,12 @@
     // completes a round
     // called when finishing that round
     gameFactory.completeRound = function completeRound() {
-      let round = gameFactory.rounds[gameFactory.currentRoundNumber];
+      const round = gameFactory.rounds[gameFactory.currentRoundNumber];
 
       for(let gameId in round.games){
-        let game = round.games[gameId];
-        let player1 =  players.getPlayerById(game.player1);
-        let player2 =  players.getPlayerById(game.player2);
+        const game = round.games[gameId];
+        const player1 =  players.getPlayerById(game.player1);
+        const player2 =  players.getPlayerById(game.player2);
         switch (game.result) {
           case "Player 1 win":
           player1.score += POINTS_FOR_WIN;
@@ -89,7 +87,7 @@
         completeComp();
         gameFactory.activeTab = "results";
       }else{
-        let nextRoundNumber = parseInt(gameFactory.currentRoundNumber) + 1;
+        const nextRoundNumber = parseInt(gameFactory.currentRoundNumber) + 1;
         gameFactory.setupRound(nextRoundNumber);
       }
     }
@@ -104,11 +102,11 @@
     // generates the countback for each player by adding the scores of all the players they have beaten
     function generateCountBack() {    
       for(let roundNumber in gameFactory.rounds){
-        let round = gameFactory.rounds[roundNumber];
+        const round = gameFactory.rounds[roundNumber];
         for(let gameNumber in round.games){
-          let game = round.games[gameNumber];
-          let player1 =  players.getPlayerById(game.player1);
-          let player2 =  players.getPlayerById(game.player2);
+          const game = round.games[gameNumber];
+          const player1 =  players.getPlayerById(game.player1);
+          const player2 =  players.getPlayerById(game.player2);
           switch (game.result) {
           case "Player 1 win":
             player1.countBack += player2.score;
@@ -128,7 +126,8 @@
 
     // takes the comp's  state and puts it into an object that can be saved
     gameFactory.getSaveObj = function getSaveObj() {      
-      let saveObj = {};
+      const saveObj = {};
+      saveObj.finalOrder = gameFactory.finalOrder;
       saveObj.isInitialised = gameFactory.isInitialised;
       saveObj.numPlayers = gameFactory.numPlayers;
       saveObj.numRounds = gameFactory.numRounds;
@@ -137,13 +136,14 @@
       saveObj.currentRoundNumber = gameFactory.currentRoundNumber;
       saveObj.players = players.getAllPlayers();
       saveObj.activeTab =  gameFactory.activeTab;
-      saveObj.playerOrder = playerOrder;
-      saveObj.savedOn = Date.now();
+      saveObj.playerOrder = gameFactory.playerOrder;
+      saveObj.savedOn = formatAMPM();
       return saveObj;
     }
 
     // sets all the game details from a save object that is passed in
-    gameFactory.setFromSaveObj = function setFromSaveObj(saveObj) {      
+    gameFactory.setFromSaveObj = function setFromSaveObj(saveObj) {
+      gameFactory.finalOrder = saveObj.finalOrder;
       gameFactory.isInitialised= saveObj.isInitialised;
       gameFactory.numPlayers= saveObj.numPlayers;
       gameFactory.numRounds= saveObj.numRounds;
@@ -152,9 +152,18 @@
       gameFactory.currentRoundNumber= saveObj.currentRoundNumber;
       players.setAllPlayers( saveObj.players);
       gameFactory.activeTab= saveObj.activeTab;       
-      playerOrder = saveObj.playerOrder;
+      gameFactory.playerOrder = saveObj.playerOrder;
     }
-    return gameFactory;
-  }]);
 
-})();
+    function formatAMPM() {
+      const d = new Date(),
+        minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+        hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+        ampm = d.getHours() >= 12 ? 'pm' : 'am',
+        months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+    }
+  
+    return gameFactory;
+  }

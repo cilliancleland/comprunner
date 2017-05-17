@@ -6,7 +6,20 @@
   "repository": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-core": "6.20.0",
+    "babel-eslint": "7.1.1",
+    "babel-loader": "6.2.10",
+    "babel-plugin-transform-react-constant-elements": "6.9.1",
+    "babel-plugin-transform-react-remove-prop-types": "0.2.11",
+    "babel-polyfill": "6.20.0",
+    "babel-preset-latest": "6.16.0",
+    "babel-preset-stage-1": "6.16.0",
     "bower": "^1.7.7",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.28.0",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
@@ -15,9 +28,16 @@
     "karma-jasmine": "^0.3.8",
     "karma-junit-reporter": "^0.4.1",
     "karma-ng-html2js-preprocessor": "^1.0.0",
-    "protractor": "^4.0.9"
+    "karma-webpack": "^2.0.3",
+    "protractor": "^4.0.9",
+    "serve": "^5.1.5",
+    "webpack": "2.2.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "scripts": {
+    "webpack-dev-server": "webpack-dev-server --open",
+    "bundle": "webpack",
+    "postbundle": "http-server -a localhost -p 8000 -c-1 ./dist",
     "postinstall": "bower install",
     "update-deps": "npm update",
     "postupdate-deps": "bower update",
@@ -31,5 +51,8 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor e2e-tests/protractor.conf.js",
     "update-index-async": "node -e \"var fs=require('fs'),indexFile='app/index-async.html',loaderFile='app/bower_components/angular-loader/angular-loader.min.js',loaderText=fs.readFileSync(loaderFile,'utf-8').split(/sourceMappingURL=angular-loader.min.js.map/).join('sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map'),indexText=fs.readFileSync(indexFile,'utf-8').split(/\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/).join('//@@NG_LOADER_START@@\\n'+loaderText+'    //@@NG_LOADER_END@@');fs.writeFileSync(indexFile,indexText);\""
+  },
+  "dependencies": {
+    "angular": "^1.6.4"
   }
 }

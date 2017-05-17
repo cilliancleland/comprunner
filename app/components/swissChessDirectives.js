@@ -1,43 +1,49 @@
-(function(){
-  "use strict";
-  swissChess.directive("scTabs", function(){
+
+  angular.module('swissChess').directive("scTabs", function(){
     return {
       type: "E",
-      templateUrl: "views/tabs.html"
+      template: require('../views/tabs.html')
     };
   });
 
-  swissChess.directive("scMenu", function() {
+  angular.module('swissChess').directive("scAbout", function(){
     return {
       type: "E",
-      templateUrl: "views/menu.html"
+      template: require('../views/about.html')
     };
   });
 
-  swissChess.directive("scSetup", function() {    
+  angular.module('swissChess').directive("scMenu", function() {
+    return {
+      type: "E",
+      template: require('../views/menu.html')
+    };
+  });
+
+  angular.module('swissChess').directive("scSetup", function() {    
     return {
       type: "E",
       scope: {
           runSetup: "&setup",
           game:"="
       },
-      templateUrl:"views/setup.html"
+      template: require('../views/setup.html')
     };
   });
 
-  swissChess.directive("scPlayerDetails", function() {  
+  angular.module('swissChess').directive("scPlayerDetails", function() {  
     return {
       type: "E",
       scope: {
         players:"=",
-        setupFirstRound: "&",
-        isStarted: "@"
+        playerOrder:"=",
+        setupFirstRound: "&"
       },
-      templateUrl:"views/player-details.html"
+      template: require('../views/player-details.html')
     };
   });
 
-  swissChess.directive("scRound", function() {
+  angular.module('swissChess').directive("scRound", function() {
     return {
       type: "E",
       scope: {
@@ -54,18 +60,17 @@
         }
 
       },
-      templateUrl: "views/round.html"
+      template: require('../views/round.html')
     };
   });
 
-  swissChess.directive("scResults", function() {
+  angular.module('swissChess').directive("scResults", function() {
     return {
       type: "E",
       scope: {
         players: "=",
         finalOrder: "="
       },
-      templateUrl: "views/results.html"
+      template: require('../views/results.html')
     };
   });
-})();

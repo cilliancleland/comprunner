@@ -1,11 +1,11 @@
 'use strict';
 
 describe('swissChessDirectives: scPlayerDetails', function() {
-  var injector;
-  var element;
-  var scope;
+  let injector;
+  let element;
+  let scope;
   beforeEach(function() {
-    injector = angular.injector(['ng','swissChess',"views/player-details.html"]);
+    injector = angular.injector(['ng','swissChess',"app/views/player-details.html"]);
 
     injector.invoke(function($rootScope, $compile) {
       scope = $rootScope.$new();
@@ -25,14 +25,14 @@ describe('swissChessDirectives: scPlayerDetails', function() {
   });
 
   it('has one row for each player', function() {
-    let inputs = element.find('input');
+    const inputs = element.find('input');
     expect(inputs.length).toEqual(8);
     expect(inputs[6].id).toEqual('playerName4');
     expect(inputs[7].id).toEqual('playerArmy4');
   });
   
   it('has a Create First Round button', function() {
-    let buttons = element.find('button');
+    const  buttons = element.find('button');
     expect(buttons.length).toEqual(1);
     expect(buttons[0].innerHTML).toEqual('Create First Round');
     buttons[0].click();
@@ -41,7 +41,6 @@ describe('swissChessDirectives: scPlayerDetails', function() {
     scope.$apply();
     buttons[0].click();
     expect(scope.setupFirstRound).toHaveBeenCalled();
-    // var isolatedScope = element.isolateScope();
   });
 
 });

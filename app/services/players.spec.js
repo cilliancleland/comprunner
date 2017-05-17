@@ -1,17 +1,17 @@
 'use strict';
 
 describe('players factory', function() {
-  var playersFactory;
+  let playersFactory;
   let players;
-  let initiatedPlayers = { 1: { id: 1, score: 0, countBack: 0 }, 2:{ id:
+  const initiatedPlayers = { 1: { id: 1, score: 0, countBack: 0 }, 2:{ id:
 2, score: 0, countBack: 0 } };
-  let playersWithScores = { 
+  const playersWithScores = { 
     1: { id:1, score: 4, countBack: 0 }, 
     2: { id:2, score: 2, countBack: 0 }, 
     3: { id:3, score: 1, countBack: 0 }, 
     4: { id:4, score: 3, countBack: 0 } 
   };
-  let playersWithScoresOdd = { 
+  const playersWithScoresOdd = { 
     1: { id:1, score: 4, countBack: 0 }, 
     2: { id:2, score: 2, countBack: 0 }, 
     3: { id:3, score: 1, countBack: 0 }, 
@@ -48,7 +48,7 @@ describe('players factory', function() {
 
   it('should getPlayerById', function() {
     playersFactory.initPlayers(2);
-    let player = playersFactory.getPlayerById(2);
+    const player = playersFactory.getPlayerById(2);
     expect(player.id).toEqual(2);    
   });
 
@@ -61,14 +61,14 @@ describe('players factory', function() {
 
   it('should shuffle an even number of players', function() {    
     playersFactory.setAllPlayers(playersWithScores);
-    let currentOrder = Object.keys(playersFactory.getAllPlayers());
+    const currentOrder = Object.keys(playersFactory.getAllPlayers());
     playersFactory.shufflePlayers(currentOrder);
     expect(currentOrder).toEqual(['3', '1', '2', '4']);    
   });
 
   it('should shuffle an odd number of players', function() {    
     playersFactory.setAllPlayers(playersWithScoresOdd);
-    let currentOrder = Object.keys(playersFactory.getAllPlayers());
+    const currentOrder = Object.keys(playersFactory.getAllPlayers());
     playersFactory.shufflePlayers(currentOrder);
     expect(currentOrder).toEqual(['5', '1', '2', '3', '4']);     
   });

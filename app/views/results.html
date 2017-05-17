@@ -7,10 +7,7 @@
       Army
     </th>
     <th class="col-xs-2">
-      Score
-    </th>
-    <th class="col-xs-2">
-      Countback
+      Score (Countback)
     </th>
   </thead>
   <tr ng-repeat="playerId in finalOrder">
@@ -21,10 +18,8 @@
       {{players[playerId].army}}
     </td>
     <td class="col-xs-2">
-      {{players[playerId].score}}
+      {{players[playerId].score}} ({{players[playerId].countBack}})
     </td>
-    <td class="col-xs-2">
-      ({{players[playerId].countBack}})
-    </td>
+
   </tr>
 </table>
