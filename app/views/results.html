@@ -10,7 +10,7 @@
       Score (Countback)
     </th>
   </thead>
-  <tr ng-repeat="playerId in finalOrder">
+  <tr ng-repeat="playerId in finalOrder"  ng-if="playerId != 'bye'">
     <td class="col-xs-4">
       {{players[playerId].name}}
     </td>

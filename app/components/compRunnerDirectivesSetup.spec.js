@@ -1,11 +1,11 @@
 'use strict';
 
-describe('swissChessDirectives: scSetup', function() {
+describe('compRunnerDirectives: scSetup', function() {
   let injector;
   let element;
   let scope;
   beforeEach(function() {
-    injector = angular.injector(['ng','swissChess',"app/views/setup.html"]);
+    injector = angular.injector(['ng','compRunner',"app/views/setup.html"]);
 
     injector.invoke(function($rootScope, $compile) {
       scope = $rootScope.$new();

@@ -1,4 +1,4 @@
-angular.module('swissChess').factory("playersFactory", [function(){
+angular.module('compRunner').factory("playersFactory", [function(){
     let players = {};
     let playersFactory = {};
 
@@ -8,15 +8,12 @@ angular.module('swissChess').factory("playersFactory", [function(){
       });
     };
 
-    playersFactory.shufflePlayers = function shufflePlayers(currentOrder) {
-      const modifier = currentOrder.length % 2 ? 1 : 2;//if an odd number of players, we need to adjust our shuffle, else the last player never gets a bye
-      currentOrder.unshift(currentOrder[currentOrder.length-modifier]);
-      currentOrder.splice(currentOrder.length-modifier, 1)
-    };
-
     playersFactory.initPlayers = function initPlayers(numPlayers) {
       for(let i=0;i<numPlayers;i++){
-        players[i+1]={id:i+1,score:0,countBack:0};
+        players[i+1]={id:i+1,score:0,countBack:0,name:"aaa",army:"a",played:[]};
+      }
+      if(numPlayers % 2 ){
+        players['bye']={id:'bye',score:0,countBack:0,played:[]};
       }
     };
 

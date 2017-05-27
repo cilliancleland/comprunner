@@ -1,11 +1,11 @@
 <div>
   <form name="playerDetails">
     <h2>Player details</h2>
-    <div ng-if="playerOrder.length===0">
+    <div ng-if="currentRoundNumber == 0">
       <p>Enter a name for each player and the army they will be using.</p>
       <p>Once you have entered this information, click on the <strong>Create First Found</strong> button</p>
     </div>
-    <div ng-repeat="player in players" class="row">
+    <div ng-repeat="player in players" class="row" ng-if="player.id != 'bye'">
       <div  class="col-xs-12">
           <h4>Player {{player.id}}
             <small>
@@ -29,6 +29,6 @@
       </div>
     </div>
     <button ng-click="setupFirstRound()" class="btn btn-block " ng-class="playerDetails.$invalid ? 'btn-disabled' : 'btn-primary'"
-    ng-disabled="playerDetails.$invalid" ng-if="playerOrder.length===0">Create First Round</button>
+    ng-disabled="playerDetails.$invalid" ng-if="currentRoundNumber == 0">Create First Round</button>
   </form>
 </div>

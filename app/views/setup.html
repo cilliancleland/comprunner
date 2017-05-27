@@ -16,7 +16,19 @@
       <label for="numRounds">Number of rounds:</label>
       <input class="form-control" ng-model="game.numRounds" id="numRounds" name="numRounds" type="number" placeholder="Number of rounds" min="1" max="999" required />
       <span class="help-block" ng-show="setupForm.numRounds.$touched && setupForm.numRounds.$invalid">Please enter a number between 1 and 999</span>
-    </div>    
+    </div>
+    <div class="form-group" >
+      <legend>Matching algorithm</legend>
+      <label for="pairingNameRobin">
+        <input type="radio" class="radio-inline" name="pairingName" ng-model="game.pairingName" id="pairingNameRobin" value="robin">
+        Round Robin
+      </label>
+      <label for="pairingNameSwiss">
+        <input type="radio" class="radio-inline" name="pairingName" ng-model="game.pairingName" id="pairingNameSwiss" value="swiss">
+        Swiss Chess
+      </label>
+    </div>
+
     <div>
         <button ng-click="runSetup()"
         ng-disabled="setupForm.$invalid" class="btn btn-block " ng-class="setupForm.$invalid ? 'btn-disabled' : 'btn-primary'">Get Started</button>

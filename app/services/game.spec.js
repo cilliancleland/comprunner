@@ -23,7 +23,7 @@ describe('game factory', function() {
     "savedOn":1494048622028}`
   );
 
-  beforeEach(angular.mock.module('swissChess'));
+  beforeEach(angular.mock.module('compRunner'));
 
   beforeEach(inject(function(_gameFactory_,_playersFactory_) {
     gameFactory = _gameFactory_;

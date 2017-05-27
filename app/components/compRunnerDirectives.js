@@ -1,26 +1,26 @@
 
-  angular.module('swissChess').directive("scTabs", function(){
+  angular.module('compRunner').directive("scTabs", function(){
     return {
       type: "E",
       template: require('../views/tabs.html')
     };
   });
 
-  angular.module('swissChess').directive("scAbout", function(){
+  angular.module('compRunner').directive("scAbout", function(){
     return {
       type: "E",
       template: require('../views/about.html')
     };
   });
 
-  angular.module('swissChess').directive("scMenu", function() {
+  angular.module('compRunner').directive("scMenu", function() {
     return {
       type: "E",
       template: require('../views/menu.html')
     };
   });
 
-  angular.module('swissChess').directive("scSetup", function() {    
+  angular.module('compRunner').directive("scSetup", function() {    
     return {
       type: "E",
       scope: {
@@ -31,19 +31,19 @@
     };
   });
 
-  angular.module('swissChess').directive("scPlayerDetails", function() {  
+  angular.module('compRunner').directive("scPlayerDetails", function() {  
     return {
       type: "E",
       scope: {
         players:"=",
-        playerOrder:"=",
+        currentRoundNumber:"=",
         setupFirstRound: "&"
       },
       template: require('../views/player-details.html')
     };
   });
 
-  angular.module('swissChess').directive("scRound", function() {
+  angular.module('compRunner').directive("scRound", function() {
     return {
       type: "E",
       scope: {
@@ -64,7 +64,7 @@
     };
   });
 
-  angular.module('swissChess').directive("scResults", function() {
+  angular.module('compRunner').directive("scResults", function() {
     return {
       type: "E",
       scope: {

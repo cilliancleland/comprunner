@@ -1,7 +1,7 @@
 require('./style.css');
 
-angular.module('swissChess', []);
+angular.module('compRunner', []);
 
-require('./components/swissChessComponent');
+require('./components/compRunnerComponent');
 
 

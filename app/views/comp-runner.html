@@ -7,7 +7,7 @@
       <h1>{{game.title}}<br /><small>{{game.numPlayers}} Players : {{game.numRounds}} Rounds</small></h1>
 
       <sc-tabs></sc-tabs>
-      <sc-player-details ng-if="game.activeTab=='players'" players="getAllPlayers()" player-order="game.playerOrder" setup-first-round="game.setupFirstRound()" ></sc-player-details>
+      <sc-player-details ng-if="game.activeTab=='players'" players="getAllPlayers()" current-round-number="game.currentRoundNumber" setup-first-round="game.setupFirstRound()" ></sc-player-details>
       <sc-round ng-if="game.activeTab!='players' && game.activeTab!='results' " players="getAllPlayers()" round="game.rounds[game.activeTab]" complete-round="game.completeRound()" is-current-round="{{game.activeTab == game.currentRoundNumber}}"></sc-round>
       <sc-results ng-if="game.activeTab=='results'" players="getAllPlayers()" final-order="game.finalOrder"></sc-results>
     </div>

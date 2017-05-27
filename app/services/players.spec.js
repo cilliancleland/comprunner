@@ -19,7 +19,7 @@ describe('players factory', function() {
     5: { id:5, score: 3, countBack: 0 } 
   };
 
-  beforeEach(angular.mock.module('swissChess'));
+  beforeEach(angular.mock.module('compRunner'));
 
   beforeEach(inject(function(_playersFactory_) {
       playersFactory = _playersFactory_;
