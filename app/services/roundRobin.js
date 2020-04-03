@@ -1,5 +1,5 @@
 
-angular.module('compRunner').factory("roundRobinFactory", [function(){
+angular.module('compRunner').factory('roundRobinFactory', [function(){
   const roundRobinFactory = {};
 
   roundRobinFactory.init = function init(allPlayers) {
@@ -22,10 +22,18 @@ angular.module('compRunner').factory("roundRobinFactory", [function(){
     return newRound;
   };
 
+  roundRobinFactory.getSaveObj = function getSaveObj() {
+    return {playerOrder: roundRobinFactory.playerOrder};
+  };
+
+  roundRobinFactory.loadSave = function loadSave(saveObj) {
+    roundRobinFactory.playerOrder = saveObj.playerOrder;
+  };
+
   function shufflePlayers(currentOrder) {
     currentOrder.unshift(currentOrder[currentOrder.length-2]);
-    currentOrder.splice(currentOrder.length-2, 1)
-  };
+    currentOrder.splice(currentOrder.length-2, 1);
+  }
 
   return roundRobinFactory;
 }]);

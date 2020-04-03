@@ -1,31 +1,31 @@
-const SAVE_PROMPT = "Are you sure, this will overwrite your saved competition?\n\nPress ok to continue.";
-const LOAD_PROMPT = "Are you sure, this will overwrite all details of your current competition?\n\nPress ok to continue.";
-const DELETE_PROMPT = "Are you sure, this will delete your saved competition?\n\nPress ok to continue.";
-const RESET_PROMPT = "Are you sure, this will clear your current competition?\n\nPress ok to continue.";
-const SAVED_GAME_NAME = "savedComp";
-compRunnerCtrl.$inject = ['$scope','playersFactory','gameFactory'];
+const SAVE_PROMPT = 'Are you sure, this will overwrite your saved competition?\n\nPress ok to continue.';
+const LOAD_PROMPT = 'Are you sure, this will overwrite all details of your current competition?\n\nPress ok to continue.';
+const DELETE_PROMPT = 'Are you sure, this will delete your saved competition?\n\nPress ok to continue.';
+const RESET_PROMPT = 'Are you sure, this will clear your current competition?\n\nPress ok to continue.';
+const SAVED_COMP_NAME = 'savedComp';
+compRunnerCtrl.$inject = ['$scope','playersFactory','compFactory'];
 
 angular.module('compRunner').controller('compRunnerCtrl', compRunnerCtrl);
 
 
-function compRunnerCtrl($scope, players, game){
+function compRunnerCtrl($scope, players, comp){
 
   $scope.saved = false;
   $scope.showAbout = false;
 
   $scope.toggleAbout = function toggleAbout(){
     $scope.showAbout = !$scope.showAbout;
-  }
+  };
 
-  // initialises the game and checks if there is a saved game that can be loaded
+  // initialises the comp and checks if there is a saved comp that can be loaded
   $scope.init = function init() {
-    game.init();
-    const savedGame = localStorage.getItem(SAVED_GAME_NAME);
-    if(savedGame){
-      const savedObj = JSON.parse(savedGame);
+    comp.init();
+    const savedComp = localStorage.getItem(SAVED_COMP_NAME);
+    if(savedComp){
+      const savedObj = JSON.parse(savedComp);
       $scope.saved = getSavedDetails(savedObj);
     }
-  }
+  };
 
   //reset the competition
   $scope.reset = function reset(){
@@ -35,38 +35,38 @@ function compRunnerCtrl($scope, players, game){
     $scope.init();
   };
 
-  // reads some details of any save game
+  // reads some details of any save comp
   function getSavedDetails(savedObj) {
       return `Competition ${savedObj.title} (${savedObj.numRounds} rounds : ${savedObj.numPlayers} players) Saved on ${savedObj.savedOn}`;
   }
 
-  // deletes a saved game
+  // deletes a saved comp
   $scope.deleteSave = function deleteSave(){
     if(!confirm(DELETE_PROMPT)){
       return;
     }
-    localStorage.removeItem(SAVED_GAME_NAME);
+    localStorage.removeItem(SAVED_COMP_NAME);
     $scope.saved = false;
   };
 
-  // saves the game details to local storage
+  // saves the comp details to local storage
   $scope.save = function save(){
-    if($scope.saved && game.initialised && !confirm(SAVE_PROMPT)){
+    if($scope.saved && comp.initialised && !confirm(SAVE_PROMPT)){
       return;
     }
-    const saveObj = game.getSaveObj();
-    localStorage.setItem(SAVED_GAME_NAME, JSON.stringify(saveObj));
-    $scope.saved =getSavedDetails(saveObj);
+    const saveObj = comp.getSaveObj();
+    localStorage.setItem(SAVED_COMP_NAME, JSON.stringify(saveObj));
+    $scope.saved = getSavedDetails(saveObj);
   };
 
-  // loads the game details from local storage
+  // loads the comp details from local storage
   $scope.load = function load(){
-    if(game.isInitialised && !confirm(LOAD_PROMPT)){
+    if(comp.isInitialised && !confirm(LOAD_PROMPT)){
       return;
     }
-    const saveStr = localStorage.getItem(SAVED_GAME_NAME);      
+    const saveStr = localStorage.getItem(SAVED_COMP_NAME);      
     const saveObj = JSON.parse(saveStr);
-    game.setFromSaveObj(saveObj);
+    comp.setFromSaveObj(saveObj);
   };
 
   //bind player functions
@@ -74,12 +74,12 @@ function compRunnerCtrl($scope, players, game){
       return players.getAllPlayers();
   };
 
-  //bind game
-  $scope.game = game;
+  //bind comp
+  $scope.comp = comp;
 
   $scope.showTab = function showTab(tab) {
-      game.activeTab = tab;
-  }
+      comp.activeTab = tab;
+  };
 
   //initialise the comp
   $scope.init();

@@ -1,19 +1,29 @@
-angular.module('compRunner').factory("playersFactory", [function(){
+angular.module('compRunner').factory('playersFactory', [function(){
     let players = {};
     let playersFactory = {};
 
-    playersFactory.sortPlayers = function sortPlayers(currentOrder, sortBy){
+    playersFactory.sortPlayers = function sortPlayers(currentOrder, sortBy = ['score', 'countback', 'id']){
+      let curSort = sortBy.shift();
       return currentOrder.sort((a,b) => {
-        return players[b][sortBy] - players[a][sortBy];
+        return doSort(a,b,curSort,sortBy);
       });
     };
 
+    function doSort(a,b,curSort,sortBy) {
+        if(players[b][curSort] === players[a][curSort] && sortBy.length > 0){
+          curSort = sortBy.shift();
+          return doSort(a,b,curSort,sortBy);
+        }else{
+          return players[b][curSort] - players[a][curSort];
+        }
+    }
+
     playersFactory.initPlayers = function initPlayers(numPlayers) {
       for(let i=0;i<numPlayers;i++){
-        players[i+1]={id:i+1,score:0,countBack:0,name:"aaa",army:"a",played:[]};
+        players[i+1]={id:i+1,score:0,countBack:0,name:'',army:'',played:[]};
       }
       if(numPlayers % 2 ){
-        players['bye']={id:'bye',score:0,countBack:0,played:[]};
+        players['bye']={id:'bye',score:0,countBack:0,name:'bye',played:[]};
       }
     };
 
@@ -31,7 +41,7 @@ angular.module('compRunner').factory("playersFactory", [function(){
 
     playersFactory.getPlayerById = function getPlayer(id) {
       return players[id];
-    }
+    };
 
     return playersFactory;
   }]);

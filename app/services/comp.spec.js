@@ -1,7 +1,7 @@
 'use strict';
 
-describe('game factory', function() {
-  let playersFactory, gameFactory, game;
+describe('comp factory', function() {
+  let playersFactory, compFactory;
 
   const saveObj = JSON.parse(`{
     "isInitialised":true,
@@ -25,8 +25,8 @@ describe('game factory', function() {
 
   beforeEach(angular.mock.module('compRunner'));
 
-  beforeEach(inject(function(_gameFactory_,_playersFactory_) {
-    gameFactory = _gameFactory_;
+  beforeEach(inject(function(_compFactory_,_playersFactory_) {
+    compFactory = _compFactory_;
     playersFactory = _playersFactory_;
 
     spyOn(playersFactory, 'resetPlayers');
@@ -45,60 +45,60 @@ describe('game factory', function() {
       };
     });
     spyOn(playersFactory, 'getPlayerById').and.callFake(function() {
-      return {"id":4,"score":0,"countBack":0,"name":"dddd","army":"d"};
+      return {'id':4,'score':0,'countBack':0,'name':'dddd','army':'d'};
     });
   }));
 
   it('should exist', function() {
-    expect(gameFactory).toBeDefined();
+    expect(compFactory).toBeDefined();
   });
 
   it('should initialise correctly', function() {    
-    gameFactory.init();
-    expect(gameFactory.activeTab).toEqual("");
-    expect(gameFactory.isInitialised).toEqual(false);
-    expect(gameFactory.numPlayers).toEqual(null);
-    expect(gameFactory.numRounds).toEqual(null);
-    expect(gameFactory.title).toEqual(null);
+    compFactory.init();
+    expect(compFactory.activeTab).toEqual('');
+    expect(compFactory.isInitialised).toEqual(false);
+    expect(compFactory.numPlayers).toEqual(null);
+    expect(compFactory.numRounds).toEqual(null);
+    expect(compFactory.title).toEqual(null);
     expect(playersFactory.resetPlayers).toHaveBeenCalled();
-    expect(gameFactory.currentRoundNumber).toEqual("0");
-    expect(gameFactory.rounds).toEqual({});
-    expect(gameFactory.finalOrder).toEqual([]);
+    expect(compFactory.currentRoundNumber).toEqual('0');
+    expect(compFactory.rounds).toEqual({});
+    expect(compFactory.finalOrder).toEqual([]);
   });
 
   it('should getStarted correctly', function() {
-    gameFactory.numPlayers = 4;
-    gameFactory.getStarted();
-    expect(gameFactory.isInitialised).toEqual(true);
+    compFactory.numPlayers = 4;
+    compFactory.getStarted();
+    expect(compFactory.isInitialised).toEqual(true);
     expect(playersFactory.initPlayers).toHaveBeenCalledWith(4);
-    expect(gameFactory.activeTab).toEqual("players");
+    expect(compFactory.activeTab).toEqual('players');
   });
 
   it('should setupFirstRound correctly', function() {
-    spyOn(gameFactory, 'setupRound');
-    gameFactory.setupFirstRound();
+    spyOn(compFactory, 'setupRound');
+    compFactory.setupFirstRound();
     expect(playersFactory.getAllPlayers).toHaveBeenCalled();
-    expect(gameFactory.setupRound).toHaveBeenCalledWith("1");
+    expect(compFactory.setupRound).toHaveBeenCalledWith('1');
   });
 
   it('should setupRound correctly', function() {
-    gameFactory.setFromSaveObj(saveObj);
-    gameFactory.setupRound(3);
-    const newRound = gameFactory.rounds[3];
+    compFactory.setFromSaveObj(saveObj);
+    compFactory.setupRound(3);
+    const newRound = compFactory.rounds[3];
     expect(newRound.roundNumber).toEqual(3);
-    expect(newRound.games["1"].player1).toEqual('1');
-    expect(newRound.games["1"].player2).toEqual('4');
-    expect(newRound.games["2"].player1).toEqual('2');
-    expect(newRound.games["2"].player2).toEqual('3');    
-    expect(newRound.games["3"]).toEqual(undefined);
+    expect(newRound.games['1'].player1).toEqual('1');
+    expect(newRound.games['1'].player2).toEqual('4');
+    expect(newRound.games['2'].player1).toEqual('2');
+    expect(newRound.games['2'].player2).toEqual('3');    
+    expect(newRound.games['3']).toEqual(undefined);
   });
 
   it('should completeRound correctly for middle round', function() {
-    gameFactory.setFromSaveObj(saveObj);
-    gameFactory.completeRound();
-    const round = gameFactory.rounds[3];
-    expect(gameFactory.currentRoundNumber).toEqual(3);
-    expect(gameFactory.activeTab).toEqual(3);
+    compFactory.setFromSaveObj(saveObj);
+    compFactory.completeRound();
+    const round = compFactory.rounds[3];
+    expect(compFactory.currentRoundNumber).toEqual(3);
+    expect(compFactory.activeTab).toEqual(3);
     expect(round.games['1'].player1).toEqual('3');
     expect(round.games['1'].player2).toEqual('4');
     expect(round.games['2'].player1).toEqual('1');
@@ -107,39 +107,38 @@ describe('game factory', function() {
 
   it('should completeRound correctly for last round', function() {
     const newSaveObj = Object.assign({}, saveObj, {numRounds:2});
-    gameFactory.setFromSaveObj(newSaveObj);
-    gameFactory.completeRound();
+    compFactory.setFromSaveObj(newSaveObj);
+    compFactory.completeRound();
 
-    expect(gameFactory.currentRoundNumber).toEqual(0);
-    expect(gameFactory.activeTab).toEqual('results');
+    expect(compFactory.currentRoundNumber).toEqual(0);
+    expect(compFactory.activeTab).toEqual('results');
     expect(playersFactory.sortPlayers).toHaveBeenCalled();
   });
 
 
   it('should setFromSaveObj correctly', function() {
-    gameFactory.setFromSaveObj(saveObj);
-    expect(gameFactory.isInitialised).toEqual(true);
-    expect(gameFactory.numPlayers).toEqual(4);
-    expect(gameFactory.numRounds).toEqual(4);
-    expect(gameFactory.title).toEqual("test");
-    expect(gameFactory.rounds).toEqual(saveObj.rounds);
-    expect(gameFactory.currentRoundNumber).toEqual(2);
-    expect(gameFactory.activeTab).toEqual(2);
+    compFactory.setFromSaveObj(saveObj);
+    expect(compFactory.isInitialised).toEqual(true);
+    expect(compFactory.numPlayers).toEqual(4);
+    expect(compFactory.numRounds).toEqual(4);
+    expect(compFactory.title).toEqual('test');
+    expect(compFactory.rounds).toEqual(saveObj.rounds);
+    expect(compFactory.currentRoundNumber).toEqual(2);
+    expect(compFactory.activeTab).toEqual(2);
     expect(playersFactory.setAllPlayers).toHaveBeenCalled();
   });
 
   it('should getSaveObj correctly', function() {    
-    gameFactory.setFromSaveObj(saveObj);
-    const newSaveObj = gameFactory.getSaveObj();
-    expect(saveObj.isInitialised).toEqual(gameFactory.isInitialised);
-    expect(saveObj.numPlayers).toEqual(gameFactory.numPlayers);
-    expect(saveObj.numRounds).toEqual(gameFactory.numRounds);
-    expect(saveObj.title).toEqual(gameFactory.title);
-    expect(saveObj.rounds).toEqual(gameFactory.rounds);
-    expect(saveObj.currentRoundNumber).toEqual(gameFactory.currentRoundNumber);
-    expect(saveObj.activeTab).toEqual(gameFactory.activeTab);
+    compFactory.setFromSaveObj(saveObj);
+    const newSaveObj = compFactory.getSaveObj();
+    expect(newSaveObj.isInitialised).toEqual(compFactory.isInitialised);
+    expect(newSaveObj.numPlayers).toEqual(compFactory.numPlayers);
+    expect(newSaveObj.numRounds).toEqual(compFactory.numRounds);
+    expect(newSaveObj.title).toEqual(compFactory.title);
+    expect(newSaveObj.rounds).toEqual(compFactory.rounds);
+    expect(newSaveObj.currentRoundNumber).toEqual(compFactory.currentRoundNumber);
+    expect(newSaveObj.activeTab).toEqual(compFactory.activeTab);
     expect(playersFactory.getAllPlayers).toHaveBeenCalled();
   });
-
   
 });

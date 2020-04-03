@@ -5,7 +5,7 @@ describe('compRunnerDirectives: scSetup', function() {
   let element;
   let scope;
   beforeEach(function() {
-    injector = angular.injector(['ng','compRunner',"app/views/setup.html"]);
+    injector = angular.injector(['ng','compRunner','app/views/setup.html']);
 
     injector.invoke(function($rootScope, $compile) {
       scope = $rootScope.$new();
@@ -26,9 +26,8 @@ describe('compRunnerDirectives: scSetup', function() {
     const buttons = element.find('button');
     expect(buttons.length).toEqual(1);
     expect(buttons[0].innerHTML).toEqual('Get Started');
-    expect(buttons[0].getAttribute("ng-click")).toEqual("runSetup()");
+    expect(buttons[0].getAttribute('ng-click')).toEqual('runSetup()');
     buttons[0].click();    
   });
-
 
 });

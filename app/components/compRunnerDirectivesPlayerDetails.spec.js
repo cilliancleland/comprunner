@@ -5,7 +5,7 @@ describe('compRunnerDirectives: scPlayerDetails', function() {
   let element;
   let scope;
   beforeEach(function() {
-    injector = angular.injector(['ng','compRunner',"app/views/player-details.html"]);
+    injector = angular.injector(['ng','compRunner','app/views/player-details.html']);
 
     injector.invoke(function($rootScope, $compile) {
       scope = $rootScope.$new();
@@ -13,10 +13,10 @@ describe('compRunnerDirectives: scPlayerDetails', function() {
       spyOn(scope, 'setupFirstRound');
 
       scope.players = { 
-        1: { id:1, score: 4, countBack: 0, name: "ted",army:"army" }, 
-        2: { id:2, score: 2, countBack: 0, name: "fred",army:"army" }, 
-        3: { id:3, score: 1, countBack: 0, name: "ned",army:"army" }, 
-        4: { id:4, score: 3, countBack: 0, name: "jed",army:"" } 
+        1: { id:1, score: 4, countBack: 0, name: 'ted',army:'army' }, 
+        2: { id:2, score: 2, countBack: 0, name: 'fred',army:'army' }, 
+        3: { id:3, score: 1, countBack: 0, name: 'ned',army:'army' }, 
+        4: { id:4, score: 3, countBack: 0, name: 'jed',army:'' } 
       };
 
       element = $compile('<sc-player-details players="players" setup-first-round="setupFirstRound()"></sc-player-details>')(scope);
@@ -37,7 +37,7 @@ describe('compRunnerDirectives: scPlayerDetails', function() {
     expect(buttons[0].innerHTML).toEqual('Create First Round');
     buttons[0].click();
     expect(scope.setupFirstRound).not.toHaveBeenCalled();
-    scope.players["4"].army="army;"
+    scope.players['4'].army='army;';
     scope.$apply();
     buttons[0].click();
     expect(scope.setupFirstRound).toHaveBeenCalled();

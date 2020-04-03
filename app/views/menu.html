@@ -18,8 +18,8 @@
           <ul class="dropdown-menu" role="menu">
             <li ng-if="saved" class="dropdown-header dropdown-header-wrapped"><p >{{saved}}</p></li>
             <li class="divider"></li>
-            <li><a href="#" ng-if = "game.isInitialised" ng-click="reset()">Reset</a></li>
-            <li><a href="#" ng-if = "game.isInitialised" ng-click="save()">Save</a></li>
+            <li><a href="#" ng-if = "comp.isInitialised" ng-click="reset()">Reset</a></li>
+            <li><a href="#" ng-if = "comp.isInitialised" ng-click="save()">Save</a></li>
             <li><a href="#" ng-if = "saved" ng-click="load()">Load</a></li>
             <li><a href="#" ng-if = "saved" ng-click="deleteSave()">Delete save</a></li>
           </ul>

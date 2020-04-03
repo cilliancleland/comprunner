@@ -36,7 +36,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({ minimize: true,sourceMap: true}),
 
   ],
-  devtool: "source-map",
+  devtool: "eval-source-map",
   module: {
     rules: [
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},

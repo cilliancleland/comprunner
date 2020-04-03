@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": 1
+  },
+ 
+  "globals": {
+    "angular": 1,
+    "it": 1,
+    "expect": 1,
+    "beforeEach": 1,
+    "inject": 1,
+    "spyOn": 1,
+    "describe": 1,
+    "require": 1
+  },
+  "rules": {
+    "no-console": 1,
+    "no-debugger": 1,
+    "no-var": 1,
+    "semi": [1, "always"],
+    "no-trailing-spaces": 0,
+    "eol-last": 1,
+    "no-underscore-dangle": 0,
+    "no-alert": 0,
+    "no-lone-blocks": 0,
+    "eqeqeq": [1, "smart"],
+    "quotes":  [1, "single", { "avoidEscape": true }]
+  }
+}

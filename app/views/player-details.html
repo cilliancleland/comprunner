@@ -22,7 +22,7 @@
       </div>      
       <div  class="col-xs-12 col-md-6">
         <div class="form-group" ng-class="playerDetails['playerArmy'+player.id].$touched && playerDetails['playerArmy'+player.id].$invalid ? 'has-error' : ''">
-          <label for="playerArmy{{player.id}}" class="hidden-xs">Army</label>
+          <label for="playerArmy{{player.id}}" class="hidden-xs">Army / Club</label>
           <input class="form-control" ng-model="player.army" name="playerArmy{{player.id}}" id="playerArmy{{player.id}}" placeholder="Army" required />
           <span class="help-block" ng-show="playerDetails['playerArmy'+player.id].$touched && playerDetails['playerArmy'+player.id].$invalid">Please enter an army</span>
         </div>

@@ -3,22 +3,34 @@
     <h2>Round {{round.roundNumber}}</h2>
     <div ng-repeat="game in round.games" class="form-group">
       <div ng-if="game.player1 != 'bye' && game.player2 != 'bye' ">
+
         <label for="result{{game.gameNumber}}">
               Game {{game.gameNumber}}
-              <small >{{players[game.player1].name}} ({{players[game.player1].army}})
+              <small >{{players[game.player1].name}} ({{players[game.player1].army}} - {{players[game.player1].score}})
               vs
-              {{players[game.player2].name}} ({{players[game.player2].army}})</small>
+              {{players[game.player2].name}} ({{players[game.player2].army}} - {{players[game.player2].score}})</small>
         </label>
-        <select name="result{{game.gameNumber}}" ng-if="isCurrentRound=='true'" id="result{{game.gameNumber}}" ng-model="game.result" required class="form-control">
-          <option value="">---select result---</option>
-          <option value="Player 1 win">{{players[game.player1].name}} win</option>
-          <option value="Player 2 win">{{players[game.player2].name}} win</option>
-          <option value="Draw">Draw</option>
-        </select>
+        <button ng-if="!game.isBeingEdited" class="btn btn-primary btn-sm pull-right" ng-click="editGame(game)">Edit matchup</button>
+        <button ng-if="game.isBeingEdited" class="btn btn-primary btn-sm pull-right" ng-click="swapPlayers({round:round,game:game})">Save matchup</button>
+        <div ng-if="game.isBeingEdited">
+          <select class="form-control" ng-options="player.id+'' as player.name for player in players" ng-model="game.tmpPlayer1"></select>
+          <select class="form-control" ng-options="player.id+'' as player.name for player in players" ng-model="game.tmpPlayer2"></select>
+        </div>
+        <div ng-if="!game.isBeingEdited">
+          <select name="result{{game.gameNumber}}" ng-if="isCurrentRound=='true'" id="result{{game.gameNumber}}" ng-model="game.result" required class="form-control">
+            <option value="">---select result---</option>
+            <option value="Player 1 win">{{players[game.player1].name}} win</option>
+            <option value="Player 2 win">{{players[game.player2].name}} win</option>
+            <option value="Draw">Draw</option>
+          </select>
+        </div>
         <p ng-if="isCurrentRound!='true'">{{game.result}}</p>
       </div>
-      <div ng-if="game.player1 === 'bye' || game.player2 === 'bye' ">
+      <div ng-if="game.player2 === 'bye' ">
         <label>Bye for {{players[game.player1].name}}</label>
+      </div>
+      <div ng-if="game.player1 === 'bye'">
+        <label>Bye for {{players[game.player2].name}}</label>
       </div>
     </div>
     <button ng-click="submit()" ng-disabled="roundForm.$invalid" ng-if="isCurrentRound=='true'" class="btn btn-block" 

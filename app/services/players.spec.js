@@ -2,7 +2,6 @@
 
 describe('players factory', function() {
   let playersFactory;
-  let players;
   const initiatedPlayers = { 1: { id: 1, score: 0, countBack: 0 }, 2:{ id:
 2, score: 0, countBack: 0 } };
   const playersWithScores = { 

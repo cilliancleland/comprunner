@@ -4,27 +4,27 @@
     <p>Once you have entered this information, click on the <strong>Get Started</strong> button</p>
     <div class="form-group"  ng-class="setupForm.title.$touched && setupForm.title.$invalid ? 'has-error' : ''">
       <label for="title">Competition Name:</label>
-      <input class="form-control" ng-model="game.title" id="title" name="title" type="text" placeholder="Competition name" required />
+      <input class="form-control" ng-model="comp.title" id="title" name="title" type="text" placeholder="Competition name" required />
       <span class="help-block" ng-show="setupForm.title.$touched && setupForm.title.$invalid">Please enter a title</span>
     </div>
     <div class="form-group"  ng-class="setupForm.numPlayers.$touched && setupForm.numPlayers.$invalid ? 'has-error' : ''">
       <label for="numPlayers">Number of players:</label>
-      <input class="form-control" ng-model="game.numPlayers" id="numPlayers" name="numPlayers" type="number" placeholder="Number of players" min="1" max="999" required />
+      <input class="form-control" ng-model="comp.numPlayers" id="numPlayers" name="numPlayers" type="number" placeholder="Number of players" min="1" max="999" required />
       <span class="help-block" ng-show="setupForm.numPlayers.$touched && setupForm.numPlayers.$invalid">Please enter a number between 1 and 999</span>
     </div>
     <div class="form-group"  ng-class="setupForm.numRounds.$touched && setupForm.numRounds.$invalid ? 'has-error' : ''">
       <label for="numRounds">Number of rounds:</label>
-      <input class="form-control" ng-model="game.numRounds" id="numRounds" name="numRounds" type="number" placeholder="Number of rounds" min="1" max="999" required />
+      <input class="form-control" ng-model="comp.numRounds" id="numRounds" name="numRounds" type="number" placeholder="Number of rounds" min="1" max="999" required />
       <span class="help-block" ng-show="setupForm.numRounds.$touched && setupForm.numRounds.$invalid">Please enter a number between 1 and 999</span>
     </div>
     <div class="form-group" >
       <legend>Matching algorithm</legend>
       <label for="pairingNameRobin">
-        <input type="radio" class="radio-inline" name="pairingName" ng-model="game.pairingName" id="pairingNameRobin" value="robin">
+        <input type="radio" class="radio-inline" name="pairingName" ng-model="comp.pairingName" id="pairingNameRobin" value="robin">
         Round Robin
       </label>
       <label for="pairingNameSwiss">
-        <input type="radio" class="radio-inline" name="pairingName" ng-model="game.pairingName" id="pairingNameSwiss" value="swiss">
+        <input type="radio" class="radio-inline" name="pairingName" ng-model="comp.pairingName" id="pairingNameSwiss" value="swiss">
         Swiss Chess
       </label>
     </div>

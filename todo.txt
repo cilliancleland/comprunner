@@ -1,3 +1,11 @@
 add test coverage
-bundle to one script
+
 eslint
+
+fix sourcemaps
+
+add more help/hint text
+
+fix save-game
+
+bye for bye??

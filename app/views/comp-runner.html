@@ -2,14 +2,30 @@
   <sc-menu></sc-menu>
   <sc-about ng-if="showAbout"></sc-about>
   <div ng-if="!showAbout">
-    <sc-setup ng-if="!game.isInitialised" setup="game.getStarted()" game="game"></sc-setup>
-    <div ng-if="game.isInitialised">
-      <h1>{{game.title}}<br /><small>{{game.numPlayers}} Players : {{game.numRounds}} Rounds</small></h1>
+    <sc-setup ng-if="!comp.isInitialised" setup="comp.getStarted()" comp="comp"></sc-setup>
+    <div ng-if="comp.isInitialised">
+      <h1>{{comp.title}}<br /><small>{{comp.numPlayers}} Players : {{comp.numRounds}} Rounds</small></h1>
 
       <sc-tabs></sc-tabs>
-      <sc-player-details ng-if="game.activeTab=='players'" players="getAllPlayers()" current-round-number="game.currentRoundNumber" setup-first-round="game.setupFirstRound()" ></sc-player-details>
-      <sc-round ng-if="game.activeTab!='players' && game.activeTab!='results' " players="getAllPlayers()" round="game.rounds[game.activeTab]" complete-round="game.completeRound()" is-current-round="{{game.activeTab == game.currentRoundNumber}}"></sc-round>
-      <sc-results ng-if="game.activeTab=='results'" players="getAllPlayers()" final-order="game.finalOrder"></sc-results>
+      <sc-player-details 
+        ng-if="comp.activeTab=='players'" 
+        players="getAllPlayers()" 
+        current-round-number="comp.currentRoundNumber" 
+        setup-first-round="comp.setupFirstRound()" >
+      </sc-player-details>
+      <sc-round 
+        ng-if="comp.activeTab!='players' && comp.activeTab!='results' " 
+        players="getAllPlayers()" 
+        round="comp.rounds[comp.activeTab]" 
+        complete-round="comp.completeRound()" 
+        swap-players="comp.swapPlayers(round, game)"  
+        is-current-round="{{comp.activeTab == comp.currentRoundNumber}}">
+      </sc-round>
+      <sc-results 
+        ng-if="comp.activeTab=='results'" 
+        players="getAllPlayers()" 
+        final-order="comp.finalOrder">
+      </sc-results>
     </div>
   </div>
 </div>
