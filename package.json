@@ -22,7 +22,7 @@
     "html-webpack-plugin": "^2.28.0",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
-    "karma": "^0.13.22",
+    "karma": "^6.4.1",
     "karma-chrome-launcher": "^0.2.3",
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.8",
@@ -30,7 +30,7 @@
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "karma-webpack": "^2.0.3",
     "protractor": "^4.0.9",
-    "serve": "^5.1.5",
+    "serve": "^5.2.4",
     "webpack": "2.2.1",
     "webpack-dev-server": "^2.4.5"
   },
